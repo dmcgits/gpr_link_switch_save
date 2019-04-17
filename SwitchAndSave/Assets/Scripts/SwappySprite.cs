@@ -10,7 +10,7 @@ public class SwappySprite : MonoBehaviour
 {
 
     [SerializeField]
-    private SpriteAtlas _spriteManager;
+    private SpriteAtlas _atlas;
     private SpriteRenderer _renderer;
 
     private SpriteConfig _config;
@@ -44,7 +44,7 @@ public class SwappySprite : MonoBehaviour
 
     private void ChangeSprite()
     {
-        _renderer.sprite = _spriteManager.GetSprite(_config.names[_config.index]);
+        _renderer.sprite = _atlas.GetSprite(_config.names[_config.index]);
     }
 
     // Use this for initialization
