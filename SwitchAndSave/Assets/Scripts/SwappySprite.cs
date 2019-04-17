@@ -12,8 +12,7 @@ public class SwappySprite : MonoBehaviour
     [SerializeField]
     private SpriteAtlas _atlas;
     private SpriteRenderer _renderer;
-
-    private SpriteConfig _config;
+   
     private string _savePath = "";
 
     struct SpriteConfig
@@ -28,6 +27,8 @@ public class SwappySprite : MonoBehaviour
         }
     }
 
+    private SpriteConfig _config;
+
     private void Awake()
     {
         // keep a reference to the sprite renderer on this gameobject
@@ -38,12 +39,12 @@ public class SwappySprite : MonoBehaviour
         // This is like the c++ "auto" keyword
         var names = new List<string>() { "spr_zelda", "spr_link", "spr_zelda_roar", "spr_link_hide" };
 
-        _config = new SpriteConfig(names, 0);
+        _config = new SpriteConfig(names, 2);
         ChangeSprite();
     }
 
     private void ChangeSprite()
-    {
+    {   
         _renderer.sprite = _atlas.GetSprite(_config.names[_config.index]);
     }
 
@@ -55,11 +56,12 @@ public class SwappySprite : MonoBehaviour
         LoadButton.OnLoadRequested += OnLoadHandler;
         SaveButton.OnSaveRequested += OnSaveHandler;
     }
+
     private void OnSelectHandler()
     {
         //Debug.Log(gameObject.name + " OnSelectHandler");
         // Increment the sprite index. if it's gone past the end of the list, go to zero.
-        if (++_config.index >= _config.names.Count) _config.index = 0;
+        if (++_config.index >= _config.names.Count) _config.index = 0; 
 
         // Now change the sprite
         ChangeSprite();
